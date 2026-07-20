@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie Ivin | Portfolio</title>
+  <meta
+    name="description"
+    content="."
+  />
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg-soft: #11131a;
+      --card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f4f7fb;
+      --muted: #a4adbb;
+      --accent: #6d5dfc;
+      --accent-2: #00cfff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      --glow: 0 0 30px rgba(0, 207, 255, 0.15);
+      --radius: 24px;
+      --max-width: 1150px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(109, 93, 252, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(0, 207, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, #07080c 0%, #0d1017 45%, #08090d 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+
+      /* Disables text selection across browsers */
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .blur {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.28;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .blur.one {
+      top: 60px;
+      left: -100px;
+      background: var(--accent);
+    }
+
+    .blur.two {
+      right: -100px;
+      bottom: 40px;
+      background: var(--accent-2);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 8, 12, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(109, 93, 252, 0.2), rgba(0, 207, 255, 0.14));
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: var(--glow);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 50px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #ffffff, #8fdfff, #9485ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      color: var(--text);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 760px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card,
+    .project,
+    .timeline-item,
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-heading {
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .profile-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        radial-gradient(circle at top, rgba(109, 93, 252, 0.25), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(0, 207, 255, 0.16), transparent 30%);
+    }
+
+    .profile-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-card p {
+      color: var(--muted);
+    }
+
+    .profile-highlight {
+      margin-top: 28px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .profile-highlight strong {
+      color: var(--accent-2);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .about-text {
+      padding: 28px;
+    }
+
+    .about-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: #dbe4f3;
+      font-size: 0.94rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      padding: 24px;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item .meta {
+      color: var(--accent-2);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project {
+      padding: 24px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .project h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .project .meta {
+      color: var(--accent-2);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .project p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .cert-card {
+      padding: 26px;
+    }
+
+    .cert-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .cert-card p {
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .contact-card {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .contact-card h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 22px;
+    }
+
+    footer {
+      padding: 36px 0 46px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .about-layout,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blur one"></div>
+  <div class="blur two"></div>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">Charlie Ivin</div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content reveal">
+          <h1>Hi, I'm <span class="gradient">Charlie Ivin</span></h1>
+
+          <div class="subtitle">Aspiring Mechanical / Computing Engineer</div>
+
+          <p>
+            Student at The Cottesloe School with a growing focus on engineering,
+            networks, infrastructure, digital systems, and practical technical work.
+            Interested in building meaningful projects across mechanical, computing,
+            surveillance, lighting control, and connected environments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>About</h2>
+          <p>
+            My modern portfolio built around technical interests, practical work,
+            leadership, and future engineering ambitions.
+          </p>
+        </div>
+
+        <div class="about-layout">
+          <div class="card profile-card reveal">
+            <div>
+              <h3>Charlie Ivin</h3>
+              <p>
+                Aspiring engineer with interests spanning computing, mechanical systems,
+                networking, CCTV, digital operations, and technical problem-solving.
+              </p>
+            </div>
+
+            <div class="profile-highlight">
+              <strong>Education</strong>
+              The Cottesloe School | 2022 - 2027
+            </div>
+          </div>
+
+          <div class="card about-text reveal">
+            <h3>Building technical skills through practical work.</h3>
+            <p>
+              I am currently pursuing secondary education at The Cottesloe School and
+              working toward graduation in 2027. My interests sit at the intersection
+              of engineering, computing, connected systems, and digital infrastructure.
+            </p>
+            <p>
+              I am especially interested in networks, infrastructure, surveillance systems,
+              lighting control, and practical technical projects that have real-world use.
+            </p>
+            <p>
+              I am motivated to keep developing technical expertise, gain more hands-on
+              experience, and contribute to projects that combine creativity, reliability,
+              and useful engineering.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Mechanical Engineering</span>
+              <span class="tag">Computing</span>
+              <span class="tag">UniFi Network</span>
+              <span class="tag">Hikvision CCTV</span>
+              <span class="tag">Network Lighting Control</span>
+              <span class="tag">Digital Media</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Experience</h2>
+          <p>
+            Leadership, digital operations, and technical interests that continue to shape
+            my development.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <h3>TCS Thumbs Up Friday Baker & Digital Lead</h3>
+            <div class="meta">The Cottesloe School | Website, Registers, Photography, Media Editing</div>
+            <p>
+              I help oversee the preparation of over 200 baked items each week to promote
+              positivity and celebrate achievements within the school community. Additionally, 
+              I manage the digital operations, including website updates, register management, 
+              photography, and media editing to maintain a strong, engaging presence.
+            </p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <h3>Secondary Education</h3>
+            <div class="meta">The Cottesloe School | Graduation expected 2027</div>
+            <p>
+              Building skills across engineering, computing, infrastructure, and digital
+              systems while preparing for future technical study and project work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Projects</h2>
+          <p>
+            A selection of projects showing my interest in systems, servers, networks,
+            and connected technical environments.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project reveal">
+            <h3>Network Outdoor Lighting Control</h3>
+            <div class="meta">Apr 2026 - Present</div>
+            <p>
+              Working on outdoor lighting control through network-based systems, combining
+              technical setup, control logic, and infrastructure planning.
+            </p>
+            <div class="skills-list">
+              <span class="tag">Network Lighting Control</span>
+              <span class="tag">Lighting Control</span>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <h3>Managing Chungas World Game Server</h3>
+            <div class="meta">Apr 2017 - Present</div>
+            <p>
+              Managing and maintaining a game server environment with an interest in uptime,
+              community systems, and connected tools such as Discord integrations.
+            </p>
+            <div class="skills-list">
+              <span class="tag">Game Server</span>
+              <span class="tag">Discord API</span>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <h3>PiHole Network Ad Blocking</h3>
+            <div class="meta">Feb 2026 - Apr 2026</div>
+            <p>
+              Built and configured a Pi-hole based ad-blocking setup to improve network
+              control, filtering, and day-to-day usability across connected devices.
+            </p>
+            <div class="skills-list">
+              <span class="tag">Pi-hole</span>
+              <span class="tag">Network Filtering</span>
+              <span class="tag">Home Network</span>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <h3>Building My Home's Network Rack</h3>
+            <div class="meta">Dec 2025 - Jan 2026</div>
+            <p>
+              Planned and built a home network rack with a focus on structure, reliability,
+              CCTV integration, and organised infrastructure.
+            </p>
+            <div class="skills-list">
+              <span class="tag">Hikvision CCTV</span>
+              <span class="tag">Network Rack</span>
+              <span class="tag">Infrastructure</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certification">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Licenses & Certification</h2>
+          <p>
+            Formal training and certifications connected to my technical interests.
+          </p>
+        </div>
+
+        <div class="card cert-card reveal">
+          <h3>CCA: Drone And Model Aircraft Online Training</h3>
+          <p><strong>Issued by:</strong> UK Civil Aviation Authority</p>
+          <p><strong>Issued:</strong> August 2023</p>
+          <p><strong>Expires:</strong> August 2028</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Skills</h2>
+          <p>
+            Core areas I am building experience in through study, experimentation,
+            and practical projects.
+          </p>
+        </div>
+
+        <div class="skills-list reveal">
+          <span class="tag">IP Cameras</span>
+          <span class="tag">CCTV</span>
+          <span class="tag">UniFi Network</span>
+          <span class="tag">Hikvision</span>
+          <span class="tag">Network Lighting Control</span>
+          <span class="tag">Game Servers</span>
+          <span class="tag">Discord API</span>
+          <span class="tag">Pi-hole</span>
+          <span class="tag">Digital Operations</span>
+          <span class="tag">Media Editing</span>
+          <span class="tag">Hikvision CCTV</span>
+          <span class="tag">Network Racks</span>
+          <span class="tag">Data Cables</span>
+          <span class="tag">Photography</span>
+          <span class="tag">Kitchen Management</span>
+          <span class="tag">Event Organisation</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <h2>Contact</h2>
+          <p>
+            I am interested in opportunities, collaborations, and projects related to
+            engineering, computing, networks, and technical systems.
+          </p>
+
+          <div class="hero-actions">
+            <a href="mailto:ci600@cottesloe.bucks.sch.uk" class="btn">
+              Email Me
+            </a>
+            <a
+              href="https://linkedin.charlieivin.co.uk/"
+              class="btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              My LinkedIn
+            </a>
+            <a
+              href="https://stats.charlieivin.co.uk"
+              class="btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              My Website Stats
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Charlie Ivin. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Core Scroll Reveal logic
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // 2. Extra Anti-Copy Measures
+    // Blocks right-clicking to prevent "Copy" from context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Blocks keyboard copy combinations (Ctrl+C / Cmd+C)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>

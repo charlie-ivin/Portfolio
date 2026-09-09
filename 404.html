@@ -71,11 +71,13 @@
       background: var(--accent-2);
     }
     header {
-      position: sticky;
+      position: absolute;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 50;
       backdrop-filter: blur(14px);
-      background: rgba(7, 8, 12, 0.72);
+      background: rgba(7, 8, 12, 0.5);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
     .nav {
@@ -98,7 +100,8 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 40px 0;
+      min-height: 100vh;
+      padding: 80px 0 60px;
     }
     .error-content {
       max-width: 560px;
@@ -156,11 +159,14 @@
       justify-content: center;
     }
     footer {
-      padding: 28px 0 36px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 0;
       text-align: center;
       color: var(--muted);
       font-size: 0.95rem;
-      position: relative;
       z-index: 1;
     }
     .reveal {

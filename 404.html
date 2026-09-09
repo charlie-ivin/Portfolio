@@ -9,16 +9,12 @@
   <style>
     :root {
       --bg: #08090d;
-      --bg-soft: #11131a;
-      --card: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.12);
       --text: #f4f7fb;
       --muted: #a4adbb;
       --accent: #6d5dfc;
       --accent-2: #00cfff;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      --border: rgba(255, 255, 255, 0.12);
       --glow: 0 0 30px rgba(0, 207, 255, 0.15);
-      --radius: 24px;
       --max-width: 1150px;
     }
     * {
@@ -26,8 +22,8 @@
       padding: 0;
       box-sizing: border-box;
     }
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      height: 100%;
     }
     body {
       font-family: Inter, Arial, sans-serif;
@@ -101,43 +97,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 0 80px;
-    }
-    .error-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      padding: 48px 36px;
       text-align: center;
+      padding: 40px 0;
+    }
+    .error-content {
       max-width: 560px;
       width: 100%;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
-        radial-gradient(circle at top, rgba(109, 93, 252, 0.2), transparent 40%),
-        radial-gradient(circle at bottom right, rgba(0, 207, 255, 0.12), transparent 35%);
     }
     .error-code {
-      font-size: clamp(5rem, 18vw, 8rem);
+      font-size: clamp(5.5rem, 18vw, 9rem);
       font-weight: 800;
       line-height: 0.9;
       letter-spacing: -0.06em;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
       background: linear-gradient(90deg, #ffffff, #8fdfff, #9485ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .error-card h1 {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
       letter-spacing: -0.03em;
       margin-bottom: 14px;
     }
-    .error-card p {
+    p {
       color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 28px;
+      font-size: 1.08rem;
+      margin-bottom: 32px;
       max-width: 420px;
       margin-left: auto;
       margin-right: auto;
@@ -187,13 +173,6 @@
       transform: translateY(0);
     }
     @media (max-width: 680px) {
-      .nav {
-        flex-direction: column;
-        gap: 12px;
-      }
-      .error-card {
-        padding: 36px 22px;
-      }
       .actions {
         flex-direction: column;
       }
@@ -215,7 +194,7 @@
 
   <main>
     <div class="container">
-      <div class="error-card reveal">
+      <div class="error-content reveal">
         <div class="error-code">404</div>
         <h1>Page not found</h1>
         <p>
@@ -224,7 +203,7 @@
         </p>
         <div class="actions">
           <a href="/" class="btn">Back to Home</a>
-          <a href="mailto:ci600@cottesloe.bucks.sch.uk" class="btn secondary">Email Me</a>
+          <a href="mailto:charlie@charlieivin.co.uk" class="btn secondary">Email Me</a>
         </div>
       </div>
     </div>
@@ -237,7 +216,6 @@
   </footer>
 
   <script>
-    // Reveal animation
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -248,7 +226,6 @@
     }, { threshold: 0.12 });
     reveals.forEach((item) => observer.observe(item));
 
-    // Anti-copy (same as portfolio)
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {

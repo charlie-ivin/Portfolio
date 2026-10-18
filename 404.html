@@ -156,25 +156,8 @@
       color: var(--muted);
       font-size: 1.08rem;
       max-width: 420px;
-      margin-bottom: 18px;
-    }
-
-    .path {
-      display: inline-block;
-      max-width: 100%;
       margin-bottom: 32px;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.85rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
-    .path[hidden] { display: none; }
 
     .actions {
       display: flex;
@@ -256,7 +239,6 @@
         <p class="lead">
           This page doesn’t exist or has been moved. Head back home or send me a message.
         </p>
-        <span class="path" id="path" hidden></span>
         <div class="actions">
           <a href="/" class="btn">Back to home</a>
           <a href="mailto:charlie@charlieivin.co.uk" class="btn secondary">Email me</a>
@@ -272,13 +254,6 @@
   </footer>
 
   <script>
-    // Show the address that was requested
-    const pathEl = document.getElementById("path");
-    if (pathEl && location.pathname && location.pathname !== "/") {
-      pathEl.textContent = location.pathname;
-      pathEl.hidden = false;
-    }
-
     // Soft grid spotlight that follows the pointer
     const root = document.documentElement;
     window.addEventListener("pointermove", (e) => {
